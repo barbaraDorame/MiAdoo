@@ -16,4 +16,5 @@ Route::get('/', function () {
 });
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('propuestas', 'PropuestaController');
+Route::resource('convocatorias', 'ConvocatoriaController');
 Auth::routes();
