@@ -8,8 +8,8 @@ class Fase1 extends Migration
 {
     public function up()
     {
-        Schema::propuesta('propuesta', function (Blueprint $table) {
-            $table->bigIncrements('id');
+        Schema::create('propuestas', function (Blueprint $table) {
+            $table->increments('id');
             $table->string('correo_instructor')->unique();
             $table->string('nombre');
             $table->string('departamento');
@@ -37,20 +37,20 @@ class Fase1 extends Migration
             $table->enum('idioma', ['Español', 'Inglés']);
             $table->integer('cupo_maximo');
             $table->integer('cupo_minimo');
-            $table->timestamp('fecha_inicio');
-            $table->timestamp('fecha_final');
+            $table->date('fecha_inicio');
+            $table->date('fecha_final');
             $table->timestamps();
         });
 
-      Schema::create('curso', function (Blueprint $table) {
+      Schema::create('cursos', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('id_propuesta')->unsigned();
             $table->enum('estado', ['Aprobado', 'Desaprobado', 'En espera'])->default('En espera');
             $table->timestamps();
-        });
-        Schema::table('curso', function (Blueprint $table) {
-            $table->foreign('id_propuesta')->references('id')->on('propuesta');
-        });
+      });
+      Schema::table('cursos', function (Blueprint $table) {
+            $table->foreign('id_propuesta')->references('id')->on('propuestas');
+      });
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Propuesta;
 
 class PropuestaController extends Controller
 {
@@ -45,8 +46,8 @@ class PropuestaController extends Controller
             'infraestructura' => 'string|required',
             'cupo_minimo' => 'numeric|required|min:1',
             'cupo_maximo' => 'numeric|required|min:1',
-            //'fecha_inicio' => 'string|required',
-            //'fecha_final' => 'string|required',
+            'fecha_inicio' => 'string|required',
+            'fecha_final' => 'string|required',
             'tipo_curso' => [
                 'required',
                 Rule::in(['Obligatoria', 'Optativa']),
@@ -180,6 +181,6 @@ class PropuestaController extends Controller
     {
         $propuesta = Propuesta::find($id);
         $propuesta->delete();
-        return redirect()->action('PropuestaController@index');
+        return view('admin.propuestas.index', ['propuestas' => $propuestas]);
     }
 }
