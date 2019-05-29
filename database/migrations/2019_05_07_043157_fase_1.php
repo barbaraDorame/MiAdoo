@@ -24,22 +24,25 @@ class Fase1 extends Migration
             $table->string('objetivo_general');
             $table->string('objetivo_especifico');
             $table->string('utilidad');
-            $table->string('experiencia_intructor');
-            $table->string('curriculum');
+            $table->string('experiencia_instructor');
+            $table->string('curriculum'); //NO LO PUSE
             $table->string('perfil_instructor');
             $table->string('curriculum_sintetico');
             $table->string('operacion_curso');
-            $table->string('unidad');
+            $table->string('unidad'); //what
             $table->string('infraestructura');
             $table->string('requisitos_alumnos');
-            $table->integer('duracion_horas');
+            $table->integer('duracion_horas'); //
             $table->enum('exclusividad', ['Abierto', 'Exclusivo']);
-            $table->enum('idioma', ['Español', 'Inglés']);
+            $table->enum('idioma', ['Espanol', 'Ingles']);
             $table->integer('cupo_maximo');
             $table->integer('cupo_minimo');
             $table->date('fecha_inicio');
             $table->date('fecha_final');
             $table->timestamps();
+
+            $table->bigInteger('user_id')->unsigned()->nullable();
+            $table->foreign('user_id')->references('id')->on('users');
         });
 
       Schema::create('cursos', function (Blueprint $table) {

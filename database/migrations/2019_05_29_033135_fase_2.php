@@ -29,8 +29,8 @@ class Fase2 extends Migration
         });
 
         Schema::create('grupos_alumnos', function (Blueprint $table) {
-            $table->integer('id_grupo');
-            $table->integer('id_alumno');
+            $table->integer('id_grupo')->unsigned();
+            $table->integer('id_alumno')->unsigned();
         });
 
         Schema::table('users', function (Blueprint $table) {
@@ -43,7 +43,7 @@ class Fase2 extends Migration
 
       Schema::table('grupos_alumnos', function (Blueprint $table) {
         $table->foreign('id_grupo')->references('id')->on('grupo');
-        $table->foreign('id_grupo')->references('id')->on('alumno');
+        $table->foreign('id_alumno')->references('id')->on('alumno');
       });
     }
 
