@@ -9,13 +9,13 @@ class PropuestaController extends Controller
 {
     public function index()
     {
-        $propuestas = Propuesta::search()->orderBy('id')->get();
-        return view('admin.propuestas.index', ['propuestas' => $propuestas]);
+        $propuestas = Propuesta::all();
+        return view('propuestas.index', compact('propuestas'));
     }
 
     public function create()
     {
-        return view('user.propuestas.create');
+        return view('propuestas.create');
     }
 
     public function store(Request $request)
@@ -34,20 +34,20 @@ class PropuestaController extends Controller
             'objetivo_especifico' => 'string|required',
             'utilidad' => 'string|required',
             'experiencia' => 'string|required',
-            'curriculum' => 'file|required',
-            'curriculum_path' => 'string|required',
+            //'curriculum' => 'file|required',
+            //'curriculum_path' => 'string|required',
             'requisitos_alumnos' => 'string|required',
-            'duracion_horas' => 'numeric|required|min:1',
+            //'duracion_horas' => 'numeric|required|min:1',
             'financiamiento' => 'string|required',
             'perfil_instructor' => 'string|required',
             'curriculum_sintetico' => 'string|required',
             'operacion_curso' => 'string|required',
-            'Unidad' => 'string|required',
+            'unidad' => 'string|required',
             'infraestructura' => 'string|required',
-            'cupo_minimo' => 'numeric|required|min:1',
-            'cupo_maximo' => 'numeric|required|min:1',
-            'fecha_inicio' => 'string|required',
-            'fecha_final' => 'string|required',
+            //'cupo_minimo' => 'numeric|required|min:1',
+            //'cupo_maximo' => 'numeric|required|min:1',
+            //'fecha_inicio' => 'string|required',
+            //'fecha_final' => 'string|required',
             'tipo_curso' => [
                 'required',
                 Rule::in(['Obligatoria', 'Optativa']),
@@ -79,17 +79,18 @@ class PropuestaController extends Controller
         $propuesta->objetivo_especifico = $request->objetivo_especifico;
         $propuesta->utilidad = $request->utilidad;
         $propuesta->experiencia_intructor = $request->experiencia_intructor;
-        $propuesta->curriculum = $request->curriculum_path;
+        //$propuesta->curriculum = $request->curriculum_path;
         $propuesta->requisitos_alumnos = $request->requisitos_alumnos;
-        $propuesta->duracion_horas = $request->duracion_horas;
+        //$propuesta->duracion_horas = $request->duracion_horas;
         $propuesta->exclusividad = $request->exclusividad;
         $propuesta->idioma = $request->idioma;
-        $propuesta->cupo_maximo = $request->cupo_maximo;
-        $propuesta->cupo_minimo = $request->cupo_minimo;
-        $propuesta->fecha_inicio = $request->fecha_inicio;
-        $propuesta->fecha_final = $request->fecha_final;
+        //$propuesta->cupo_maximo = $request->cupo_maximo;
+        //$propuesta->cupo_minimo = $request->cupo_minimo;
+        //$propuesta->fecha_inicio = $request->fecha_inicio;
+        //$propuesta->fecha_final = $request->fecha_final;
 
         $propuesta->save();
+        return view('propuestas.index');
     }
 
     public function show($id)
@@ -125,12 +126,12 @@ class PropuestaController extends Controller
             'operacion_curso' => 'string|required',
             'unidad' => 'string|required',
             'infraestructura' => 'string|required',
-            'curriculum' => 'file|required',
-            'curriculum_path' => 'string|required',
+            //'curriculum' => 'file|required',
+            //'curriculum_path' => 'string|required',
             'requisitos_alumnos' => 'string|required',
-            'duracion_horas' => 'numeric|required|min:0',
-            'cupo_minimo' => 'numeric|required|min:0',
-            'cupo_maximo' => 'numeric|required|min:0',
+            //'duracion_horas' => 'numeric|required|min:0',
+            //'cupo_minimo' => 'numeric|required|min:0',
+            //'cupo_maximo' => 'numeric|required|min:0',
             //'fecha_inicio' => 'string|required',
             //'fecha_final' => 'string|required',
             'tipo_curso' => [
