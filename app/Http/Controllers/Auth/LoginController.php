@@ -25,7 +25,36 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    //protected $redirectTo = '/home';
+
+    //funcion que redirige dependiendo del
+    //rol que tenga el ususario a ingresar
+    public function redirectTo(){
+
+        // User role
+        $role = Auth::user()->role->name;
+
+        // Check user role
+        /* mover aqui poner hacia donde es el redireccionamiento
+        switch ($role) {
+            case 'Instructor':
+                    return '/';
+                break;
+            case 'Responsable':
+                    return '/';
+                break;
+            case 'Division':
+                    return '/';
+                break;
+            case 'Alumnos':
+                    return '/';
+                break;
+            default:
+                    return '/login';
+                break;
+        }
+        */
+    }
 
     /**
      * Create a new controller instance.
