@@ -13,7 +13,7 @@ class Fase2 extends Migration
      */
     public function up()
     {
-        Schema::create('alumno', function (Blueprint $table) {
+        Schema::create('alumnos', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nombre');
             $table->string('apellido');
@@ -22,9 +22,10 @@ class Fase2 extends Migration
             $table->string('folio');
         });
 
-        Schema::create('grupo', function (Blueprint $table) {
+        Schema::create('convocatorias', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('id_curso')->unsigned();
+            $table->string('aula');
             $table->string('horario');
         });
 
@@ -37,14 +38,15 @@ class Fase2 extends Migration
             $table->enum('tipo', ['Alumno', 'Instructor', 'Responsable', 'Division']);
       });
 
-      Schema::table('grupo', function (Blueprint $table) {
+      Schema::table('convocatorias', function (Blueprint $table) {
         $table->foreign('id_curso')->references('id')->on('cursos');
       });
-
+      /*
       Schema::table('grupos_alumnos', function (Blueprint $table) {
         $table->foreign('id_grupo')->references('id')->on('grupo');
         $table->foreign('id_grupo')->references('id')->on('alumno');
       });
+      */
     }
 
     /**

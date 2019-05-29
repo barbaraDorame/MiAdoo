@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Propuesta de curso</title>
+    <title>convocatorias</title>
 
     <!-- Font Icon -->
     <link rel="stylesheet" href="fonts/material-icon/css/material-design-iconic-font.min.css">
@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="/sass/style.css">
 </head>
 <body>
-  Entro al index propuesta de curso
+  Entro al index de convocatorias en el responsable de curso
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/jquery-ui/jquery-ui.min.js"></script>
   <script src="vendor/jquery-validation/dist/jquery.validate.min.js"></script>
