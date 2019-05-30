@@ -10,7 +10,7 @@ class Fase1 extends Migration
     {
         Schema::create('propuestas', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('correo_instructor')->unique();
+            $table->string('correo_instructor');
             $table->string('nombre');
             $table->string('departamento');
             $table->string('division');
@@ -34,13 +34,13 @@ class Fase1 extends Migration
             $table->string('requisitos_alumnos');
             $table->integer('duracion_horas'); //
             $table->enum('exclusividad', ['Abierto', 'Exclusivo']);
-            $table->enum('idioma', ['Espanol', 'Ingles']);
+            $table->enum('idioma', ['es', 'en']);
             $table->integer('cupo_maximo');
             $table->integer('cupo_minimo');
             $table->date('fecha_inicio');
             $table->date('fecha_final');
             $table->timestamps();
-
+            $table->enum('estado', ['Aprobado', 'Desaprobado', 'En espera']);
             $table->bigInteger('user_id')->unsigned()->nullable();
             $table->foreign('user_id')->references('id')->on('users');
         });

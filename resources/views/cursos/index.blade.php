@@ -25,13 +25,6 @@
       @endif
       </div>
     </div>
-    @if(Auth::user()->getTipo() === 'Instructor')
-    <div class="row mt-2">
-      <div class="col-12">
-        <a href="{{ route('propuestas.create') }}" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Crear curso</a>
-      </div>
-    </div>
-    @endif
     <div class="row">
       <div class="col-12">
         <table class="table table-striped">
@@ -39,17 +32,29 @@
               <tr>
                 <td>ID</td>
                 <td>Nombre</td>
-                <td>Correo electronico</td>
+                <td>Estado</td>
                 <td colspan="2">Accion</td>
               </tr>
           </thead>
           <tbody>
-              @foreach($propuestas as $propuesta)
+              @foreach($cursos as $curso)
               <tr>
-                  <td>{{$propuesta->id}}</td>
-                  <td>{{$propuesta->nombre}}</td>
-                  <td>{{$propuesta->correo_instructor}}</td>
-                  <td><a href="{{ route('propuestas.edit',$propuesta->id)}}" class="btn btn-primary">Edit</a></td>
+                  <td>{{$curso->propuesta->id}}</td>
+                  <td>{{$curso->propuesta->nombre}}</td>
+                  <td>
+                    <select form="form{{$curso->id}}" class="form-control" name="estado">
+                      <option value="Aprobado" {{ $curso->estado == "Aprobado" ? " selected=true " : '' }}>Aprobado</option>
+                      <option value="Desaprobado" {{ $curso->estado == "Desaprobado" ? " selected=true " : '' }} >Desaprobado</option>
+                      <option value="En espera" {{ $curso->estado == "En espera" ? " selected=true " : '' }} >En espera</option>
+                    </select>
+                  </td>
+                  <td>
+                      <form id="form{{$curso->id}}" action="{{ route('propuestas.update', $propuesta->id)}}" method="post">
+                        @csrf
+                        @method('PATCH')
+                        <button class="btn btn-primary" type="submit">Guardar</button>
+                      </form>
+                  </td>
                   <td>
                       <form action="{{ route('propuestas.destroy', $propuesta->id)}}" method="post">
                         @csrf

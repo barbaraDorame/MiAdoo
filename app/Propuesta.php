@@ -10,7 +10,9 @@ class Propuesta extends Model
                          'division', 'tipo_curso', 'contenido', 'contenido_sintetico',
                          'modulos', 'evaluacion', 'documentacion', 'financiamiento',
                          'objetivo_general', 'objetivo_especifico', 'utilidad',
-                         'experiencia_intructor', 'curriculum', 'requisitos_alumnos',
+                         'perfil_instructor', 'curriculum_sintetico', 'operacion_curso',
+                         'unidad', 'infraestructura', 'estado',
+                         'experiencia_instructor', 'curriculum', 'requisitos_alumnos',
                          'duracion_horas', 'exclusividad', 'idioma', 'cupo_maximo',
                          'cupo_minimo', 'fecha_inicio', 'fecha_final'];
 }

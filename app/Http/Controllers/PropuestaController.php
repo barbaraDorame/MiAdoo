@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 use App\Propuesta;
 
@@ -22,7 +23,7 @@ class PropuestaController extends Controller
     {
         $request->validate([
             'nombre' => 'string|required',
-            'correo' => 'string|required',
+            'correo_instructor' => 'string|required',
             'departamento' => 'string|required',
             'division' => 'string|required',
             'contenido' => 'string|required',
@@ -33,21 +34,20 @@ class PropuestaController extends Controller
             'objetivo_general' => 'string|required',
             'objetivo_especifico' => 'string|required',
             'utilidad' => 'string|required',
-            'experiencia' => 'string|required',
+            'experiencia_instructor' => 'string|required',
             //'curriculum' => 'file|required',
-            //'curriculum_path' => 'string|required',
             'requisitos_alumnos' => 'string|required',
-            //'duracion_horas' => 'numeric|required|min:1',
+            'duracion_horas' => 'numeric|required|min:1',
             'financiamiento' => 'string|required',
             'perfil_instructor' => 'string|required',
             'curriculum_sintetico' => 'string|required',
             'operacion_curso' => 'string|required',
             'unidad' => 'string|required',
             'infraestructura' => 'string|required',
-            //'cupo_minimo' => 'numeric|required|min:1',
-            //'cupo_maximo' => 'numeric|required|min:1',
-            //'fecha_inicio' => 'string|required',
-            //'fecha_final' => 'string|required',
+            'cupo_minimo' => 'numeric|required|min:1',
+            'cupo_maximo' => 'numeric|required|min:1',
+            'fecha_inicio' => 'date|required',
+            'fecha_final' => 'date|required',
             'tipo_curso' => [
                 'required',
                 Rule::in(['Obligatoria', 'Optativa']),
@@ -58,57 +58,34 @@ class PropuestaController extends Controller
             ],
             'idioma' => [
                 'required',
-                Rule::in(['Español', 'Inglés']),
+                Rule::in(['es', 'en']),
             ],
         ]);
 
         $propuesta = new Propuesta;
 
-        $propuesta->nombre = $request->nombre;
-        $propuesta->correo_instructor = $request->correo;
-        $propuesta->departamento = $request->departamento;
-        $propuesta->division = $request->division;
-        $propuesta->tipo_curso = $request->tipo_curso;
-        $propuesta->contenido = $request->contenido;
-        $propuesta->contenido_sintetico = $request->contenido_sintetico;
-        $propuesta->modulos = $request->modulos;
-        $propuesta->evaluacion = $request->evaluacion;
-        $propuesta->documentacion = $request->documentacion;
-        $propuesta->financiamiento = $request->financiamiento;
-        $propuesta->objetivo_general = $request->objetivo_general;
-        $propuesta->objetivo_especifico = $request->objetivo_especifico;
-        $propuesta->utilidad = $request->utilidad;
-        $propuesta->experiencia_intructor = $request->experiencia_intructor;
-        //$propuesta->curriculum = $request->curriculum_path;
-        $propuesta->requisitos_alumnos = $request->requisitos_alumnos;
-        //$propuesta->duracion_horas = $request->duracion_horas;
-        $propuesta->exclusividad = $request->exclusividad;
-        $propuesta->idioma = $request->idioma;
-        //$propuesta->cupo_maximo = $request->cupo_maximo;
-        //$propuesta->cupo_minimo = $request->cupo_minimo;
-        //$propuesta->fecha_inicio = $request->fecha_inicio;
-        //$propuesta->fecha_final = $request->fecha_final;
+        $propuesta->fill($request->all());
 
         $propuesta->save();
-        return view('propuestas.index');
+        return redirect()->action('PropuestaController@index');
     }
 
     public function show($id)
     {
-        return view('admin.propuestas.show', ['propuesta' => Propuesta::findOrFail($id)]);
+        return view('propuestas.show');
     }
 
     public function edit($id)
     {
         $propuesta = Propuesta::find($id);
-        return view('admin.propuestas.edit', compact('propuesta', 'id'));
+        return view('propuestas.edit', compact('propuesta', 'id'));
     }
 
     public function update(Request $request, $id)
     {
         $request->validate([
             'nombre' => 'string|required',
-            'correo' => 'string|required',
+            'correo_instructor' => 'string|required',
             'departamento' => 'string|required',
             'division' => 'string|required',
             'contenido' => 'string|required',
@@ -119,21 +96,20 @@ class PropuestaController extends Controller
             'objetivo_general' => 'string|required',
             'objetivo_especifico' => 'string|required',
             'utilidad' => 'string|required',
-            'experiencia' => 'string|required',
+            'experiencia_instructor' => 'string|required',
+            'curriculum' => 'file',
+            'requisitos_alumnos' => 'string|required',
+            'duracion_horas' => 'numeric|required|min:1',
             'financiamiento' => 'string|required',
             'perfil_instructor' => 'string|required',
             'curriculum_sintetico' => 'string|required',
             'operacion_curso' => 'string|required',
             'unidad' => 'string|required',
             'infraestructura' => 'string|required',
-            //'curriculum' => 'file|required',
-            //'curriculum_path' => 'string|required',
-            'requisitos_alumnos' => 'string|required',
-            //'duracion_horas' => 'numeric|required|min:0',
-            //'cupo_minimo' => 'numeric|required|min:0',
-            //'cupo_maximo' => 'numeric|required|min:0',
-            //'fecha_inicio' => 'string|required',
-            //'fecha_final' => 'string|required',
+            'cupo_minimo' => 'numeric|required|min:1',
+            'cupo_maximo' => 'numeric|required|min:1',
+            'fecha_inicio' => 'date|required',
+            'fecha_final' => 'date|required',
             'tipo_curso' => [
                 'required',
                 Rule::in(['Obligatoria', 'Optativa']),
@@ -144,44 +120,22 @@ class PropuestaController extends Controller
             ],
             'idioma' => [
                 'required',
-                Rule::in(['Español', 'Inglés']),
+                Rule::in(['es', 'en']),
             ],
         ]);
 
         $propuesta = Propuesta::find($id);
 
-        $propuesta->nombre = $request->nombre;
-        $propuesta->correo_instructor = $request->correo;
-        $propuesta->departamento = $request->departamento;
-        $propuesta->division = $request->division;
-        $propuesta->tipo_curso = $request->tipo_curso;
-        $propuesta->contenido = $request->contenido;
-        $propuesta->contenido_sintetico = $request->contenido_sintetico;
-        $propuesta->modulos = $request->modulos;
-        $propuesta->evaluacion = $request->evaluacion;
-        $propuesta->documentacion = $request->documentacion;
-        $propuesta->financiamiento = $request->financiamiento;
-        $propuesta->objetivo_general = $request->objetivo_general;
-        $propuesta->objetivo_especifico = $request->objetivo_especifico;
-        $propuesta->utilidad = $request->utilidad;
-        $propuesta->experiencia_intructor = $request->experiencia_intructor;
-        $propuesta->curriculum = $request->curriculum_path;
-        $propuesta->requisitos_alumnos = $request->requisitos_alumnos;
-        $propuesta->duracion_horas = $request->duracion_horas;
-        $propuesta->exclusividad = $request->exclusividad;
-        $propuesta->idioma = $request->idioma;
-        $propuesta->cupo_maximo = $request->cupo_maximo;
-        $propuesta->cupo_minimo = $request->cupo_minimo;
-        $propuesta->fecha_inicio = $request->fecha_inicio;
-        $propuesta->fecha_final = $request->fecha_final;
+        $propuesta->fill($request->all());
 
         $propuesta->save();
+        return redirect()->action('PropuestaController@index');
     }
 
     public function destroy($id)
     {
         $propuesta = Propuesta::find($id);
         $propuesta->delete();
-        return view('admin.propuestas.index', ['propuestas' => $propuestas]);
+        return redirect()->action('PropuestaController@index');
     }
 }

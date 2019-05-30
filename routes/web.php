@@ -15,6 +15,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/home', 'HomeController@index')->name('home');
-Route::resource('propuestas', 'PropuestaController');
+Route::group(['middleware' => 'tipo:Responsable,Instructor'], function()
+{
+  Route::resource('propuestas', 'PropuestaController');
+});
+Route::group(['middleware' => 'tipo:Responsable'], function()
+{
+  Route::resource('cursos', 'CursoController');
+});
 Route::resource('convocatorias', 'ConvocatoriaController');
 Auth::routes();
