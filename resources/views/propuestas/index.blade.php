@@ -78,6 +78,16 @@
                     </form>
                     @endif
                   </td>
+                  <td>
+                    @if($propuesta->curso && Auth::user()->getTipo() === 'Responsable' && $propuesta->curso->estado == "Aprobado")
+                    <td><a href="{{ route('convocatorias.create', $propuesta->curso->id)}}" class="btn btn-primary">Crear Convocatoria</a></td>
+                    <!--form action="{{ route('convocatorias.create', $propuesta->id)}}" method="post">
+                      @csrf
+                      <input type="hidden" name="id_curso" value="{{ $propuesta->curso->id }}">
+                      <button class="btn btn-warning" type="submit">Crear Convocatoria</button>
+                    </form-->
+                    @endif
+                  </td>
               </tr>
               @endforeach
           </tbody>
