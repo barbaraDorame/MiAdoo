@@ -11,5 +11,9 @@ class Curso extends Model
       return $this->belongsTo('App\Propuesta', 'id_propuesta');
     }
 
+    public function convocatoria() {
+        return $this->hasOne('App\Convocatoria', 'id_curso');
+    }
+
     protected $fillable = ['id_propuesta', 'estado'];
 }

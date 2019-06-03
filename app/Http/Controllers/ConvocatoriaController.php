@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Convocatoria;
+use App\Curso;
 
 
 class ConvocatoriaController extends Controller
@@ -14,9 +15,10 @@ class ConvocatoriaController extends Controller
         return view('convocatorias.index', compact('convocatorias'));
     }
 
-    public function create()
+    public function create(Request $id)
     {
-        return view('convocatorias.create');
+        $curso = Curso::find($id);
+        return view('convocatorias.create', compact('curso', 'id'));
     }
 
     public function store(Request $request)

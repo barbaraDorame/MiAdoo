@@ -23,5 +23,11 @@ Route::group(['middleware' => 'tipo:Responsable'], function()
 {
   Route::resource('cursos', 'CursoController');
 });
-Route::resource('convocatorias', 'ConvocatoriaController');
+
+Route::group(['middleware' => 'tipo:Responsable'], function()
+{
+  Route::resource('convocatorias', 'ConvocatoriaController');
+});
+
+Route::resource('alumnos', 'AlumnoController');
 Auth::routes();

@@ -74,6 +74,15 @@
               </select>
           </div>
         </div>
+        <div class="col-md-4">
+            <div class="form-group">
+              <label class="col-form-label col-form-label-sm" for="tipo_curso">Tipo de curso</label>
+                <select class="form-control" name="tipo_curso" value="{{ $propuesta->idioma }}">
+                  <option value="es"  {{ $propuesta->idioma == "es" ? " selected=true " : '' }}>Español</option>
+                  <option value="en"  {{ $propuesta->idioma == "en" ? " selected=true " : '' }}>Ingles</option>
+                </select>
+            </div>
+          </div>
       </div>
       <div class="row">
         <div class="col-md-6">
