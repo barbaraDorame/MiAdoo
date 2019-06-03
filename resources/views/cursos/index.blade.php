@@ -49,14 +49,14 @@
                     </select>
                   </td>
                   <td>
-                      <form id="form{{$curso->id}}" action="{{ route('propuestas.update', $propuesta->id)}}" method="post">
+                      <form id="form{{$curso->id}}" action="{{ route('propuestas.update', $curso->propuesta->id)}}" method="post">
                         @csrf
                         @method('PATCH')
                         <button class="btn btn-primary" type="submit">Guardar</button>
                       </form>
                   </td>
                   <td>
-                      <form action="{{ route('propuestas.destroy', $propuesta->id)}}" method="post">
+                      <form action="{{ route('propuestas.destroy', $curso->propuesta->id)}}" method="post">
                         @csrf
                         @method('DELETE')
                         <button class="btn btn-danger" type="submit">Delete</button>

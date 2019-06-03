@@ -15,6 +15,15 @@
     <link rel="stylesheet" href="/sass/style.css">
 </head>
 <body>
+  @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+  @endif
   <div class="container">
     <div class="row">
       <div class="col-12">
@@ -40,7 +49,7 @@
                 <td>ID</td>
                 <td>Nombre</td>
                 <td>Correo electronico</td>
-                <td colspan="2">Accion</td>
+                <td colspan="3">Accion</td>
               </tr>
           </thead>
           <tbody>
@@ -51,11 +60,23 @@
                   <td>{{$propuesta->correo_instructor}}</td>
                   <td><a href="{{ route('propuestas.edit',$propuesta->id)}}" class="btn btn-primary">Edit</a></td>
                   <td>
-                      <form action="{{ route('propuestas.destroy', $propuesta->id)}}" method="post">
-                        @csrf
-                        @method('DELETE')
-                        <button class="btn btn-danger" type="submit">Delete</button>
-                      </form>
+                    <form action="{{ route('propuestas.destroy', $propuesta->id)}}" method="post">
+                      @csrf
+                      @method('DELETE')
+                      <button class="btn btn-danger" type="submit">Delete</button>
+                    </form>
+                  </td>
+                  <td>
+                    @if($propuesta->curso)
+                      {{ $propuesta->curso->estado }}
+                    @elseif(Auth::user()->getTipo() === 'Responsable')
+                    <form action="{{ route('cursos.store', $propuesta->id)}}" method="post">
+                      @csrf
+                      <input type="hidden" name="id_propuesta" value="{{ $propuesta->id }}">
+                      <input type="hidden" name="estado" value="En espera">
+                      <button class="btn btn-warning" type="submit">Crear curso</button>
+                    </form>
+                    @endif
                   </td>
               </tr>
               @endforeach

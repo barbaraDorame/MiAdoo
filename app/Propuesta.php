@@ -15,4 +15,7 @@ class Propuesta extends Model
                          'experiencia_instructor', 'curriculum', 'requisitos_alumnos',
                          'duracion_horas', 'exclusividad', 'idioma', 'cupo_maximo',
                          'cupo_minimo', 'fecha_inicio', 'fecha_final'];
+  public function curso() {
+    return $this->hasOne('App\Curso', 'id_propuesta');
+  }
 }

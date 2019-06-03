@@ -8,6 +8,8 @@ class Curso extends Model
 {
     public function propuesta()
     {
-      return $this->hasOne('App\Propuesta', 'id_propuesta');
+      return $this->belongsTo('App\Propuesta', 'id_propuesta');
     }
+
+    protected $fillable = ['id_propuesta', 'estado'];
 }
