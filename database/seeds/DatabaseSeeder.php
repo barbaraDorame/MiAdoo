@@ -13,48 +13,49 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
       DB::table('users')->insert([
-        'name' => 'instructormcinstructor',
-        'email' => "xXxPimientaxXx@correo.org",
+        'name' => 'instructor1',
+        'email' => "instructor@uson.mx",
         'password' => bcrypt('password'),
         'tipo' => 'Instructor',
       ]);
 
       DB::table('users')->insert([
-        'name' => 'responsablemcresponsable',
-        'email' => "xXxTuJefaxXx@correo.org",
+        'name' => 'responsable1',
+        'email' => "responsable@uson.mx",
         'password' => bcrypt('password'),
         'tipo' => 'Responsable',
       ]);
       DB::table('users')->insert([
-        'name' => 'alumnoreprobADO',
-        'email' => "ctmwnqliaolawea@correo.org",
+        'name' => 'Jefferson',
+        'apellido'=>'Gutierritos'
+        'email' => "a214202562@uson.mx",
         'password' => bcrypt('password'),
         'tipo' => 'Alumno',
       ]);
 
       DB::table('propuestas')->insert([
-        'correo_instructor'=> "xXxPimientaxXx@correo.org",
-        'nombre' =>"Curso 1",
+        'correo_instructor'=> "instructor@uson.mx",
+        'nombre' =>"Teoria del Caos",
         'departamento'=> "Matematicas",
         'division'=> "Ciencias exactas y Naturales",
         'tipo_curso'=> "Optativa",
-        'contenido'=>"dasnldasn",
-        'contenido_sintetico'=>"nfdslnfsd",
-        'modulos'=>"FDSFdsfa",
-        'evaluacion'=>"dsafda",
-        'documentacion'=>"csafdas",
-        'financiamiento'=>"fdsadf",
-        'objetivo_general'=>"fdsfsfgds",
-        'objetivo_especifico'=>"fdsgfsdg",
-        'utilidad'=>"bvbgdsdfg",
-        'experiencia_instructor'=>"nada",
+        'contenido'=>"Contenido 1, 2, 3",
+        'contenido_sintetico'=>"contenido sintetico",
+        'modulos'=>"modulo1, modulo 2 , modulo 3.",
+        'evaluacion'=>"Asistencia",
+        'documentacion'=>"la documentacion se encuentra en",
+        'financiamiento'=>"El financiamiento es propio",
+        'objetivo_general'=>"Que el alumno tenga un conocimiento basico acerca de lo que es el caos",
+        'objetivo_especifico'=>"dar las bases para que pueda grafcar y entender las ecuaciones basicas de la teoria del caos",
+        'utilidad'=>"utilidad",
+        'experiencia_instructor'=>"Doctorado en ..., 8 semestres de profesor en la Unversidad de ...",
         'curriculum'=>"text.txt", //NO LO PUSE
-        'perfil_instructor'=>"ya quisieras",
-        'curriculum_sintetico'=>"no hay",
+        'perfil_instructor'=>"Doctorado en metematicas",
+        'curriculum_sintetico'=>"...",
         'operacion_curso'=>"Fisico",
         'unidad'=>"Unidad Centro",
-        'infraestructura'=>"LA que quietes",
-        'requisitos_alumnos'=>"existir",
+        'infraestructura'=>"Salon con computadoras con sistema operativo Ubuntu y herramientas basicas coomo gnuplot y compilador de python",
+        'requisitos_alumnos'=>"Conocimientos de calculo y ecuaciones diferenciales",
         'duracion_horas'=>20, //
         'exclusividad'=> 'Abierto',
         'idioma'=>'es',
@@ -70,7 +71,7 @@ class DatabaseSeeder extends Seeder
         'id_propuesta'=>1,
         'estado'=> 'Aprobado',
       ]);
-
+        /*
       DB::table('alumnos')->insert([
         'nombre'=>"pepe",
         'apellido'=>"jajaj",
@@ -78,7 +79,7 @@ class DatabaseSeeder extends Seeder
         'no_expediente'=>"2543685",
         'folio'=>"201907pj23",
       ]);
-
+        */
       DB::table('convocatorias')->insert([
           'id_curso'=>1,
           'aula'=>"3K-203",
@@ -87,7 +88,7 @@ class DatabaseSeeder extends Seeder
 
       DB::table('grupos_alumnos')->insert([
           'id_grupo'=>1,
-          'id_alumno'=>1,
+          'id_alumno'=>3,
       ]);
     }
 }

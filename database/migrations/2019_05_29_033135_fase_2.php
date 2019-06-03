@@ -13,6 +13,7 @@ class Fase2 extends Migration
      */
     public function up()
     {
+        /*
         Schema::create('alumnos', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nombre');
@@ -22,6 +23,7 @@ class Fase2 extends Migration
             $table->string('folio');
             $table->foreign('email')->references('email')->on('users');
         });
+        */
 
         Schema::create('convocatorias', function (Blueprint $table) {
             $table->increments('id');
@@ -48,7 +50,7 @@ class Fase2 extends Migration
 
       Schema::table('grupos_alumnos', function (Blueprint $table) {
         $table->foreign('id_grupo')->references('id')->on('convocatorias');
-        $table->foreign('id_alumno')->references('id')->on('alumnos');
+        $table->foreign('id_alumno')->references('id')->on('users');
       });
 
     }
